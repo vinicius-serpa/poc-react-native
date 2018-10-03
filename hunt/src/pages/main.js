@@ -9,17 +9,23 @@ export default class Main extends Component {
     };
 
     state = {
-        docs: []
+        docs: [],
+        productInfo: {},
+        page: 1
     };
 
     componentDidMount() {
         this.loadProducts();
     };
 
-    loadProducts = async() => {
-        const response = await api.get("/products");
-        const { docs } = response.data;
-        this.setState({ docs });
+    loadProducts = async(page = 1) => {
+        const response = await api.get(`/products?page=${page}`);
+        const { docs, ... productInfo } = response.data;
+        this.setState({ 
+            docs: [... this.state.docs, ... docs], 
+            productInfo,
+            page
+        });
     };
 
     renderItem = ({ item }) => (
@@ -32,6 +38,14 @@ export default class Main extends Component {
         </View>
     );
 
+    loadMore = () => {
+        const { page, productInfo } = this.state;
+        if (page == productInfo.pages)
+            return;
+        const pageNumber = page + 1;
+        this.loadProducts(pageNumber);
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -40,6 +54,8 @@ export default class Main extends Component {
                     data={this.state.docs}
                     keyExtractor={item => item._id}
                     renderItem={this.renderItem}
+                    onEndReached={this.loadMore}
+                    onEndReachedThreshold={0.1}
                 />
             </View>
         );
