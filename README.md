@@ -17,20 +17,21 @@ Check install documentation on docs directory
 
 ## Common comands
 
-'''
-$ react-native init <project_name>
-$ react-native run-android // to create a bundle and with new native code
-$ react-native start // after first execution of run-android
-'''
+
+- $ react-native init <project_name>
+- $ react-native run-android // to create a bundle and with new native code
+- $ react-native start // after first execution of run-android
 
 bundler is responsible to package the app
+
 run-android need executed into project folder
+
 before run, open the android emulator
 
 ## Common react components
 
-$ npm install react-navigation
-$ npm install axios // api access
+- $ npm install react-navigation
+- $ npm install axios // api access
 
 ## Throubleshooting
 
@@ -40,13 +41,10 @@ React Native needs python 2.7. If you have python 3.0 installed, rename python 3
 
 ### Babel
 
-Babel would be throw an error.
-https://github.com/facebook/react-native/issues/21310
+Babel would be throw an error: https://github.com/facebook/react-native/issues/21310
 
 To fix babel, execute this steps:
 
-'''
-$ npm add @babel/runtime
-$ npm install (optional)
-$ react-native start
-'''
+- $ npm add @babel/runtime
+- $ npm install (optional)
+- $ react-native start
